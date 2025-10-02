@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Branding - Wahyu Aditya</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Mansalva&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+    <style>
+        /* ================================== */
+        /* == PENGATURAN DASAR & VARIABEL == */
+        /* ================================== */
+        :root {
+            --warna-latar: #121212;
+            --warna-kartu: #1e1e1e;
+            --warna-teks: #e0e0e0;
+            --warna-judul: #ffffff;
+            --warna-aksen: #ffffff;
+            --font-utama: 'Poppins', sans-serif;
+            --font-signature: 'Mansalva', cursive;
+        }
+
+        /* Reset CSS & Gaya Dasar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-utama);
+            background: linear-gradient(rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 0.8)), 
+                        url('3.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: var(--warna-teks);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            color: var(--warna-judul);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        h1 { font-size: 3.5rem; }
+        h2 { 
+            font-family: 'Amatic SC', cursive;
+            font-size: 4.5rem;
+            text-align: center;
+            background: linear-gradient(45deg, #FFFFFF, #252525);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* ================= */
+        /* == HEADER & NAV == */
+        /* ================= */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 15px 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+            background-color: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: flex-end; 
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        nav a {
+            color: var(--warna-teks);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--warna-aksen);
+        }
+
+        #triggerAboutModal {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        #triggerAboutModal:hover {
+            color: var(--warna-aksen);
+        }
+
+        /* ================= */
+        /* == BAGIAN HERO == */
+        /* ================= */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(18, 18, 18, 0.7), rgba(18, 18, 18, 1)), url('1.jpg') no-repeat center center/cover;
+            background-attachment: fixed;
+        }
+
+        /* ================ */
+        /* == SECTIONS == */
+        /* ================ */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-content {
+            background: var(--warna-kartu);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        section#about {
+            background: linear-gradient(rgba(18, 18, 18, 0.7), rgba(18, 18, 18, 0.9)), 
+                        url('2.jpg') no-repeat center center/cover;
+            background-attachment: fixed;
+        }
+
+        section#about .section-content {
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        /* ============================== */
+        /* == ANIMASI GESER & TIMBUL == */
+        /* ============================== */
+        .hidden {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateX(-100%);
+            transition: all 1s;
+        }
+
+        .hidden-right {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateX(100%);
+            transition: all 1s;
+        }
+
+        .show {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateX(0);
+        }
+
+        .portfolio-item:nth-child(2) {
+            transition-delay: 200ms;
+        }
+        .portfolio-item:nth-child(3) {
+            transition-delay: 400ms;
+        }
+
+        /* ================= */
+        /* == PORTFOLIO == */
+        /* ================= */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .portfolio-item {
+            background: var(--warna-latar);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.05);
+        }
+
+        #proyek-1, #proyek-2, #proyek-3 {
+            background-size: cover;
+            background-position: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-height: 250px; 
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        #proyek-1 {
+            background-image: linear-gradient(rgba(18,18,18,0.7), rgba(18,18,18,0.7)), 
+                              url('4.jpg');
+        }
+        #proyek-2 {
+            background-image: linear-gradient(rgba(18,18,18,0.7), rgba(18,18,18,0.7)), 
+                              url('5.jpg');
+        }
+        #proyek-3 {
+            background-image: linear-gradient(rgba(18,18,18,0.7), rgba(18,18,18,0.7)), 
+                              url('6.jpg');
+        }
+
+        /* =========================== */
+        /* == PENGATURAN BG CONTACT == */
+        /* =========================== */
+        #contact .section-content {
+            background: linear-gradient(rgba(18, 18, 18, 0.7), rgba(18, 18, 18, 0.7)), 
+                        url('7.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* =================== */
+        /* == SOCIAL ICONS == */
+        /* =================== */
+        .social-icons {
+            text-align: center;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px; 
+        }
+
+        .social-icons a {
+            font-size: 3.5rem;
+            margin: 0 25px;
+            text-decoration: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+            display: inline-block;
+            color: var(--warna-teks);
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-8px) scale(1.1);
+            color: var(--warna-aksen);
+        }
+
+        /* =================== */
+        /* == MODAL (POPUP) == */
+        /* =================== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s forwards;
+        }
+
+        .modal-content {
+            background-color: var(--warna-kartu);
+            margin: auto;
+            padding: 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            width: 90%;
+            max-width: 900px;
+            position: relative;
+            transform: translateY(-50px);
+            opacity: 0;
+            animation: slideIn 0.4s forwards 0.3s ease-out;
+            overflow: hidden;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-button, .close-portfolio-button {
+            color: var(--warna-aksen);
+            font-size: 30px;
+            font-weight: bold;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            z-index: 10;
+        }
+
+        .close-button:hover,
+        .close-button:focus,
+        .close-portfolio-button:hover,
+        .close-portfolio-button:focus {
+            color: var(--warna-judul);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* ================================== */
+        /* == GAYA BARU UNTUK MODAL ABOUT == */
+        /* ================================== */
+        .about-modal-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 40px;
+        }
+
+        .about-image-top {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin-bottom: 25px;
+            background-color: #000;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .about-image-top img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 5px;
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        .about-text-bottom {
+            flex: none;
+            padding: 0;
+            text-align: left;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .about-text-bottom h3 {
+            font-family: var(--font-signature);
+            font-size: 4rem;
+            color: var(--warna-aksen);
+            margin-bottom: 5px;
+            line-height: 1;
+            text-align: center;
+        }
+
+        .about-text-bottom .about-me-tag {
+            font-size: 0.8rem;
+            color: #ccc;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .about-text-bottom p {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            color: #d0d0d0;
+        }
+
+        .about-text-bottom p.justified-text {
+            text-align: justify;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .about-text-bottom .bottom-info {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #aboutModal .modal-content {
+            flex-direction: column;
+        }
+
+        /* =========================== */
+        /* == GAYA GALERI MODAL BARU == */
+        /* =========================== */
+        .portfolio-modal-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gallery-main-image {
+            width: 100%;
+            max-width: 700px;
+            height: auto;
+            min-height: 400px;
+            background-color: #000;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .gallery-main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            cursor: zoom-in;
+        }
+
+        .gallery-thumbnails {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 15px;
+            width: 100%;
+            max-width: 700px;
+            padding-bottom: 20px;
+            justify-items: center; 
+        }
+
+        .thumbnail-item {
+            position: relative;
+        }
+
+        .thumbnail-img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .thumbnail-img:hover {
+            transform: scale(1.1);
+        }
+
+        .thumbnail-img.active {
+            border-color: var(--warna-aksen);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        .image-description {
+            background: rgba(28, 28, 28, 0.9);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            width: 100%;
+            max-width: 700px;
+            text-align: left;
+            display: none; 
+            animation: fadeIn 0.5s;
+        }
+
+        .image-description h3 {
+            font-family: var(--font-signature);
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: var(--warna-aksen);
+            text-align: left;
+        }
+        .image-description p {
+            margin: 0;
+            color: var(--warna-teks);
+            font-size: 0.9rem;
+            text-align: justify;
+        }
+
+        .bungee-title {
+            font-family: 'Bungee Tint', sans-serif !important;
+            font-size: 3.2rem !important;
+            line-height: 1.2 !important;
+        }
+
+        /* ================================ */
+        /* == GAYA ZOOM-IN IMAGE LIGHTBOX == */
+        /* ================================ */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+            cursor: pointer;
+        }
+
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: 90%;
+            max-height: 85vh;
+            object-fit: contain;
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {transform: scale(0.8);}
+            to {transform: scale(1);}
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .close-lightbox:hover,
+        .close-lightbox:focus {
+            color: #bbb;
+            text-decoration: none;
+        }
+
+        /* ================= */
+        /* == MEDIA QUERY == */
+        /* ================= */
+        @media (max-width: 768px) {
+            .modal-content {
+                max-width: 95%;
+                padding: 20px;
+            }
+            .about-modal-layout {
+                padding: 20px;
+            }
+            .about-image-top {
+                max-width: 90%;
+                margin-bottom: 15px;
+            }
+            .about-text-bottom h3 {
+                font-size: 2.5rem;
+            }
+            .about-text-bottom p {
+                font-size: 0.9rem;
+            }
+            .gallery-main-image {
+                min-height: 250px;
+            }
+            .thumbnail-img {
+                width: 80px;
+                height: 60px;
+            }
+        }
+        
+        /* ========================================= */
+        /* == PENYEMPURNAAN & GAYA LOGO CV KUSTOM == */
+        /* ========================================= */
+
+        .social-icons a {
+            user-select: none; 
+            -webkit-user-select: none;
+            -moz-user-select: none; 
+            -ms-user-select: none; 
+        }
+
+        .cv-logo-icon {
+            width: 5.3rem;
+            height: auto;
+            vertical-align: middle;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-icons a:hover .cv-logo-icon {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="container">
+            <div>
+                <a href="#home">HOME</a>
+                <a href="#" id="openAboutModal">SAYA</a>
+                <a href="#portfolio">PORTOFOLIO</a>
+                <a href="#contact">CONTACT</a>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+    </section>
+
+    <section id="about">
+        <div class="container section-content hidden">
+            <h2 id="triggerAboutModal">Tentang Saya</h2>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="container">
+            <h2>Portfolio</h2>
+            <div class="portfolio-grid">
+                
+                <div id="proyek-1" class="portfolio-item hidden"
+                     data-images='[
+                         {"src": "A.jpg", "title": "SERTIFIKAT A", "desc": "Sertifikat A (Udemy): Sertifikat penyelesaian kursus Wordpress Web Development for Absolute Beginner Zero to Hero. Pelatihan ini mencakup dasar-dasar pengembangan web menggunakan WordPress, mulai dari konsep awal hingga menjadi mahir, yang diajarkan oleh Stephen Koel Soren."},
+                         {"src": "B.jpg", "title": "SERTIFIKAT B", "desc": "Sertifikat B (Udemy): Sertifikat kelulusan untuk React.JS Crash Course: The Complete Course for Beginners. Kursus intensif ini memberikan pemahaman mendalam tentang React.JS, sebuah pustaka JavaScript populer untuk membangun antarmuka pengguna, yang dibimbing oleh Meta Brains."},
+                         {"src": "C.jpg", "title": "SERTIFIKAT C", "desc": "Sertifikat C (Udemy): Sertifikat penyelesaian untuk Advanced Capcut Course Learn Professional Video Editing. Kursus ini mengasah keterampilan penyuntingan video profesional menggunakan aplikasi Capcut, yang diselenggarakan oleh Sayman Creative Institute."},
+                         {"src": "D.jpg", "title": "SERTIFIKAT D", "desc": "Sertifikat D (Udemy): Sertifikat kelulusan dari kursus Python for Machine Learning: The Complete Beginners Course. Pelatihan ini mencakup konsep dasar Python yang diaplikasikan dalam machine learning, diajarkan oleh instruktur dari Meta Brains dan Skool of AI."},
+                         {"src": "E.png", "title": "SERTIFIKAT E", "desc": "Sertifikat E (Dicoding): Sertifikat kompetensi kelulusan dari kelas Belajar Dasar Manajemen Proyek. Pelatihan ini membekali dengan pengetahuan fundamental tentang cara mengelola proyek teknologi secara efektif dan efisien sesuai standar industri."},
+                         {"src": "F.png", "title": "SERTIFIKAT F", "desc": "Sertifikat F (Dicoding): Sertifikat kompetensi kelulusan pada kelas Belajar Prinsip Pemrograman SOLID. Sertifikasi ini menunjukkan pemahaman dalam menerapkan lima prinsip desain perangkat lunak SOLID untuk menciptakan kode yang lebih mudah dipelihara, fleksibel, dan skalabel."},
+                         {"src": "G.png", "title": "SERTIFIKAT G", "desc": "Sertifikat G (Dicoding): Sertifikat kompetensi kelulusan untuk kelas Memulai Pemrograman dengan Haskell. Sertifikasi ini membuktikan kemampuan dasar dalam menggunakan Haskell, sebuah bahasa pemrograman fungsional yang dikenal akan keandalannya dalam membangun perangkat lunak."},
+                         {"src": "H.png", "title": "SERTIFIKAT H", "desc": "Sertifikat H (Dicoding): Sertifikat kompetensi kelulusan pada kelas Memulai Pemrograman Dengan Java. Pelatihan ini memberikan fondasi yang kuat dalam bahasa pemrograman Java, salah satu bahasa paling populer dan serbaguna di dunia untuk pengembangan aplikasi."},
+                         {"src": "I.png", "title": "SERTIFIKAT I", "desc": "Sertifikat I (Dicoding): Sertifikat kompetensi kelulusan untuk kelas Memulai Pemrograman Dengan C. Sertifikasi ini menunjukkan penguasaan dasar-dasar bahasa pemrograman C, yang merupakan fondasi penting dalam ilmu komputer dan rekayasa perangkat lunak."},
+                         {"src": "J.jpg", "title": "SERTIFIKAT J", "desc": "Sertifikat J (Udemy): Sertifikat penyelesaian untuk Canva Social Media Masterclass Graphic Design Video Editing. Pelatihan ini memberikan penguasaan komprehensif dalam penggunaan Canva untuk desain grafis dan penyuntingan video, yang dirancang khusus untuk kebutuhan media sosial, dan diajarkan oleh Sayman Creative Institute."}
+                     ]'> 
+                </div>
+
+                <div id="proyek-2" class="portfolio-item hidden"
+                     data-images='[
+                         {"src": "MA.jpg", "title": "Video Editing", "desc": "Sebagai seorang Creator Capcut, saya menguasai penyuntingan video menggunakan berbagai perangkat lunak, dengan fokus utama pada CapCut. Berpengalaman dalam membuat template video yang menarik dan sinematik, seperti yang ditunjukkan pada profil CapCut. Keahlian ini mencakup pemotongan klip, gradasi warna, penambahan efek visual, dan sinkronisasi audio untuk menghasilkan konten video berkualitas tinggi."},
+                         {"src": "MAA.jpg", "title": "Desain Grafis", "desc": "Sebagai anggota tim desainer di Canva, saya memiliki kemampuan dalam membuat berbagai materi desain grafis untuk kebutuhan digital dan cetak. Saya mampu merancang konten untuk media sosial, presentasi, poster, dan elemen visual lainnya dengan estetika yang modern dan bersih. Keterampilan ini didukung oleh pemahaman mendalam tentang prinsip-prinsip desain."},
+                         {"src": "MAAA.jpg", "title": "Microsoft Office 365", "desc": "Menguasai ekosistem Microsoft Office 365 untuk mendukung produktivitas dan kolaborasi. Keahlian ini mencakup pembuatan dokumen profesional (Word), analisis dan visualisasi data (Excel), desain presentasi yang efektif (PowerPoint), serta manajemen komunikasi dan jadwal (Outlook). Terampil dalam memanfaatkan OneDrive untuk penyimpanan cloud, berbagi file, dan kolaborasi tim secara real-time."},
+                         {"src": "MAAAA.jpg", "title": "Penyuntingan Foto", "desc": "Memiliki keahlian dalam penyuntingan dan perbaikan kualitas foto digital menggunakan aplikasi Snapseed. Mampu melakukan penyesuaian warna (color correction), mengatur pencahayaan (exposure), meningkatkan ketajaman, serta menerapkan berbagai filter dan efek artistik untuk menghasilkan gambar yang lebih profesional dan menarik secara visual."}
+                     ]'>
+                </div>
+
+                <div id="proyek-3" class="portfolio-item hidden"
+                     data-images='[
+                         {"src": "NAA.jpg", "title": "Electrical Technician Assistant", "desc": "Sebagai Electrical Technician Assistant di UD. DAP TEKNIK (2024 - Sekarang), tugas saya meliputi membantu instalasi, perawatan, dan perbaikan sistem kelistrikan pada proyek perusahaan. Saya juga bertanggung jawab melaksanakan pengecekan dan troubleshooting peralatan listrik untuk memastikan keamanan dan kinerja optimal. Pengalaman ini mengasah kemampuan teknis dan pemecahan masalah saya di bidang kelistrikan."},
+                         {"src": "NAAA.jpg", "title": "Online Sales Administrator", "desc": "Sebagai Online Sales Administrator di FRIENDLY FLORIST (2021 - 2023), saya mengelola akun dagang online (marketplace & media sosial) dengan mengunggah produk, mengatur stok, serta memastikan informasi selalu terbaru dan akurat. Saya juga melayani pelanggan melalui chat/telepon, menangani pesanan hingga proses transaksi, serta memastikan kepuasan pelanggan. Pengalaman ini melatih saya dalam penjualan, manajemen inventaris, dan pelayanan pelanggan."}
+                     ]'>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <div class="container section-content hidden-right">
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/in/wahyu-aditya-93947a386" target="_blank" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://www.instagram.com/yuadtya?utm_source=ig_web_button_share_sheet&igsh=MWRtaTkwemwwYXo2aQ==" target="_blank" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                
+                <a href="mailto:wahyu.aditya.putra@student.undiksha.ac.id" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                
+                <a href="https://drive.google.com/file/d/1zYS3SJbb-8sXf3NxYvQ_7vvXooSHhu0e/view?usp=sharing" target="_blank" aria-label="Lihat CV">
+                    <img src="CV.png" alt="Logo CV" class="cv-logo-icon">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div id="aboutModal" class="modal">
+        <div class="modal-content about-modal-layout">
+            <span class="close-button">&times;</span>
+            <div class="modal-image-container about-image-top">
+                <img src="PE.jpg" alt="Foto Wahyu Aditya">
+            </div>
+            <div class="modal-text-content about-text-bottom">
+                <p class="about-me-tag">ABOUT ME</p>
+                <h3>WAHYU ADITYA</h3>
+                <p>Hai Saya Wahyu Aditya.</p>
+                <p class="justified-text">Sebagai seorang mahasiswa Program Studi Sistem Informasi di Universitas Pendidikan Ganesha (Undiksha), saya menemukan minat yang besar dalam dunia teknologi. Saya sangat tertarik untuk mendalami bagaimana teknologi digital, pengembangan perangkat lunak, dan strategi bisnis dapat beririsan untuk menciptakan solusi inovatif yang memecahkan masalah nyata. Ketertarikan ini saya wujudkan dengan terus mengasah berbagai keterampilan praktis. Saya mahir dalam desain grafis menggunakan Canva, penyuntingan video dengan Capcut, serta memiliki fondasi yang kuat dalam dasar-dasar pemrograman. Saya percaya bahwa kemampuan untuk bekerja secara mandiri memungkinkan saya untuk fokus, sementara kerja kolaboratif dalam tim membuka pintu bagi ide-ide baru dan perspektif yang beragam.
+
+Di luar lingkungan akademis, kehidupan saya diwarnai oleh berbagai kegiatan yang membentuk karakter. Sebagai satu dari dua bersaudara, saya belajar arti pentingnya berbagi dan tanggung jawab sejak dini. Saya adalah pribadi yang energik dan sangat menyukai tantangan, sebuah sifat yang saya salurkan melalui hobi berolahraga dan mendaki gunung. Bagi saya, mendaki bukan hanya soal mencapai puncak, tetapi tentang perjalanan, ketekunan, dan perencanaan yang matang. Semangat juang ini juga tertanam kuat dari latar belakang saya sebagai atlet bela diri. Pengalaman berkompetisi di cabang olahraga Kempo (SMA) dan Pencak Silat (SMP) dalam ajang Porjar Badung telah mengajarkan saya nilai-nilai disiplin, fokus, dan sportivitas yang saya bawa hingga hari ini.
+
+Website ini lebih dari sekadar portofolio; ini adalah jurnal visual dari perjalanan akademis, kreatif, dan profesional saya. Silakan jelajahi karya-karya saya, dan jangan ragu untuk terhubung. Terima kasih atas kunjungan Anda.</p>
+                <p class="bottom-info">SISTEM INFORMASI | 2415091101</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="portfolioModal" class="modal">
+        <div class="modal-content">
+            <span class="close-portfolio-button">&times;</span>
+            <div class="portfolio-modal-layout">
+                <div class="gallery-main-image">
+                    <img id="galleryMainImage" src="" alt="Detail Proyek">
+                </div>
+                <div id="imageDescription" class="image-description">
+                    <h3 id="imageTitle"></h3>
+                    <p id="imageDesc"></p>
+                </div>
+                <div id="galleryThumbnails" class="gallery-thumbnails">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="backgroundMusic" src="song.mp3"></audio>
+
+    <div id="imageLightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightboxImg">
+    </div>
+
+    <script>
+        // JS untuk Animasi Scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        });
+        const hiddenElements = document.querySelectorAll('.hidden, .hidden-right');
+        hiddenElements.forEach((el) => observer.observe(el));
+
+        // JS untuk Musik
+        const music = document.getElementById('backgroundMusic');
+
+        // JS untuk Modal (Pop-up) Tentang Saya
+        const modal = document.getElementById("aboutModal");
+        const openModalBtnNav = document.getElementById("openAboutModal");
+        const openModalBtnSection = document.getElementById("triggerAboutModal");
+        const closeBtn = document.getElementsByClassName("close-button")[0];
+
+        function openModal() {
+            modal.style.display = "flex";
+            document.body.style.overflow = "hidden";
+            music.play();
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+            music.pause();
+            music.currentTime = 0;
+        }
+
+        openModalBtnNav.onclick = openModal;
+        openModalBtnSection.onclick = openModal;
+        closeBtn.onclick = closeModal;
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // ===================================
+        // == JAVASCRIPT MODAL PORTFOLIO BARU ==
+        // ===================================
+        const portfolioModal = document.getElementById("portfolioModal");
+        const portfolioItems = document.querySelectorAll(".portfolio-item");
+        const closePortfolioBtn = document.querySelector(".close-portfolio-button");
+        const mainImage = document.getElementById("galleryMainImage");
+        const thumbnailsContainer = document.getElementById("galleryThumbnails");
+        const imageDescriptionBox = document.getElementById('imageDescription');
+        const imageTitle = document.getElementById('imageTitle');
+        const imageDesc = document.getElementById('imageDesc');
+
+        // === Variabel untuk Lightbox Zoom Gambar ===
+        const imageLightbox = document.getElementById('imageLightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const closeLightboxBtn = document.querySelector('.close-lightbox');
+
+        function openPortfolioModal(event) {
+            const item = event.currentTarget;
+            const imagesData = JSON.parse(item.dataset.images);
+
+            thumbnailsContainer.innerHTML = '';
+            imageDescriptionBox.style.display = 'none'; 
+
+            if (imagesData && imagesData.length > 0) {
+                mainImage.src = imagesData[0].src;
+
+                // Tampilkan deskripsi item pertama secara default
+                imageTitle.textContent = imagesData[0].title;
+                imageDesc.textContent = imagesData[0].desc;
+                imageDescriptionBox.style.display = 'block';
+
+                // Atur gaya judul berdasarkan ID item
+                imageTitle.classList.remove('bungee-title'); // Pastikan dihapus dulu
+                if (item.id === "proyek-1" || item.id === "proyek-2" || item.id === "proyek-3") {
+                    imageTitle.classList.add('bungee-title');
+                } else {
+                    // Jika ada proyek lain yang tidak ingin menggunakan bungee-title, bisa diatur di sini
+                }
+
+                mainImage.onclick = () => {
+                    imageLightbox.style.display = 'block';
+                    lightboxImg.src = mainImage.src;
+                };
+
+                imagesData.forEach((imageData, index) => {
+                    const thumb = document.createElement('img');
+                    thumb.src = imageData.src;
+                    thumb.classList.add('thumbnail-img');
+
+                    thumb.addEventListener('click', () => {
+                        mainImage.src = imageData.src;
+                        
+                        imageTitle.textContent = imageData.title;
+                        imageDesc.textContent = imageData.desc;
+                        imageDescriptionBox.style.display = 'block';
+
+                        thumbnailsContainer.querySelectorAll('.thumbnail-img').forEach(t => t.classList.remove('active'));
+                        thumb.classList.add('active');
+                        
+                        // Atur gaya judul saat thumbnail diklik
+                        imageTitle.classList.remove('bungee-title'); // Pastikan dihapus dulu
+                        if (item.id === "proyek-1" || item.id === "proyek-2" || item.id === "proyek-3") {
+                            imageTitle.classList.add('bungee-title');
+                        }
+                    });
+
+                    if (index === 0) {
+                        thumb.classList.add('active');
+                    }
+                    thumbnailsContainer.appendChild(thumb);
+                });
+            }
+            
+            portfolioModal.style.display = "flex";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closePortfolioModal() {
+            portfolioModal.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        portfolioItems.forEach(item => {
+            item.addEventListener('click', openPortfolioModal);
+        });
+
+        closePortfolioBtn.onclick = closePortfolioModal;
+        window.addEventListener('click', function(event) {
+            if (event.target == portfolioModal) {
+                closePortfolioModal();
+            }
+        });
+
+        // === Fungsi untuk Menutup Lightbox ===
+        function closeLightbox() {
+            imageLightbox.style.display = 'none';
+        }
+        closeLightboxBtn.onclick = closeLightbox;
+        imageLightbox.onclick = function(event) {
+            if (event.target == imageLightbox) {
+                closeLightbox();
+            }
+        };
+    </script>
+</body>
+</html>
